@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Data files (too large for git)
+*.xlsx
+*.csv
+*.parquet
+
+# Generated plot outputs (optional — remove lines below if you want plots tracked)
+outputs/plots/*.png
+
+# Secrets / credentials — NEVER commit these
+.env.local
+secrets.py
+config_local.py
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
