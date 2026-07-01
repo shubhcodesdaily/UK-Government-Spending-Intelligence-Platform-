@@ -1,4 +1,4 @@
-# GB UK Spending Intelligence Platform
+# 🇬🇧 UK Spending Intelligence Platform
 
 A beginner-friendly end-to-end data pipeline that downloads UK Government spending data, cleans it, loads it into a PostgreSQL database, and produces visual analysis charts — all in a single Jupyter notebook.
 
@@ -8,9 +8,13 @@ A beginner-friendly end-to-end data pipeline that downloads UK Government spendi
 
 - [What This Project Does](#what-this-project-does)
 - [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Setup Instructions](#setup-instructions)
 - [Database Setup](#database-setup)
+- [Running the Notebook](#running-the-notebook)
 - [Output Files](#output-files)
 - [Pipeline Architecture](#pipeline-architecture)
+- [Common Errors & Fixes](#common-errors--fixes)
 - [Important Security Note](#important-security-note)
 
 ---
@@ -49,8 +53,84 @@ uk-spending-intelligence/
 
 ---
 
+## Prerequisites
 
-Use AWS RDS (what the notebook is configured for)
+Before you start, make sure you have:
+
+- **Python 3.9 or higher** — [Download here](https://www.python.org/downloads/)
+- **pip** — comes with Python (check with `pip --version`)
+- **Jupyter Notebook** — installed as part of `requirements.txt`
+- **A PostgreSQL database** — the notebook loads data into one. If you don't have one, see [Database Setup](#database-setup) below.
+
+> 💡 **New to Python?** Think of Python as the language, pip as the app store that installs packages, and Jupyter Notebook as the interactive editor where you run code cell by cell.
+
+---
+
+## Setup Instructions
+
+Follow these steps in order:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/uk-spending-intelligence.git
+cd uk-spending-intelligence
+```
+
+> Replace `YOUR_USERNAME` with your actual GitHub username.
+
+### 2. Create a virtual environment
+
+A virtual environment keeps this project's packages separate from the rest of your computer.
+
+```bash
+# Create it
+python -m venv venv
+
+# Activate it — Mac/Linux:
+source venv/bin/activate
+
+# Activate it — Windows:
+venv\Scripts\activate
+```
+
+You should see `(venv)` appear at the start of your terminal line.
+
+### 3. Install required packages
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs everything the notebook needs (pandas, matplotlib, sqlalchemy, etc.).
+
+### 4. Set up your environment variables
+
+The notebook needs your database credentials. **Never hard-code passwords in your code.**
+
+```bash
+# Copy the example file
+cp .env.example .env
+
+# Open .env in any text editor and fill in your real values
+```
+
+Your `.env` file should look like this when filled in:
+
+```
+DB_URL=postgresql+psycopg2://myuser:mypassword@myhost.rds.amazonaws.com:5432/postgres
+TABLE_NAME=uk_spending
+```
+
+> ⚠️ The `.gitignore` file is already set up to prevent `.env` from being uploaded to GitHub. Never remove it from `.gitignore`.
+
+---
+
+## Database Setup
+
+The notebook uploads data to a **PostgreSQL database**. You have two options:
+
+### Option A — Use AWS RDS (what the notebook is configured for)
 
 1. Log in to [AWS Console](https://console.aws.amazon.com/)
 2. Go to **RDS → Create database**
@@ -131,6 +211,31 @@ GOV.UK Excel file
       │
       ▼
    [EDA]     ── Generate 6 analytical charts
+```
+
+---
+
+## Common Errors & Fixes
+
+| Error | Likely Cause | Fix |
+|-------|-------------|-----|
+| `ModuleNotFoundError` | Package not installed | Run `pip install -r requirements.txt` |
+| `OperationalError: could not connect to server` | Wrong DB credentials or DB is off | Check your `.env` DB_URL and make sure the database is running |
+| `URLError` or download fails | No internet / GOV.UK URL changed | Check your connection; the source URL may have moved |
+| `KeyError: 'spending'` | Column rename didn't apply | Make sure you run all cells top-to-bottom, not out of order |
+| `Unnamed: 0` column appears | CSV was saved with the index | The notebook handles this automatically with `errors='ignore'` |
+
+---
+
+## Important Security Note
+
+> 🔐 **The original notebook contains a hardcoded database password.** Before pushing to GitHub, make sure you:
+>
+> 1. Move the `DB_URL` into a `.env` file (see [Setup Instructions](#setup-instructions))
+> 2. Confirm `.env` appears in `.gitignore` (it does by default in this repo)
+> 3. Never paste passwords directly in notebook cells
+>
+> If you accidentally committed credentials, rotate (change) your database password immediately and consider the old one compromised.
 
 ---
 
