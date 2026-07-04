@@ -62,7 +62,7 @@ Before you start, make sure you have:
 - **Jupyter Notebook** — installed as part of `requirements.txt`
 - **A PostgreSQL database** — the notebook loads data into one. If you don't have one, see [Database Setup](#database-setup) below.
 
-> 💡 **New to Python?** Think of Python as the language, pip as the app store that installs packages, and Jupyter Notebook as the interactive editor where you run code cell by cell.
+>  **New to Python?** Think of Python as the language, pip as the app store that installs packages, and Jupyter Notebook as the interactive editor where you run code cell by cell.
 
 ---
 
@@ -122,7 +122,7 @@ DB_URL=postgresql+psycopg2://myuser:mypassword@myhost.rds.amazonaws.com:5432/pos
 TABLE_NAME=uk_spending
 ```
 
-> ⚠️ The `.gitignore` file is already set up to prevent `.env` from being uploaded to GitHub. Never remove it from `.gitignore`.
+> The `.gitignore` file is already set up to prevent `.env` from being uploaded to GitHub. Never remove it from `.gitignore`.
 
 ---
 
@@ -175,7 +175,7 @@ The notebook will:
 3. Upload it to your database
 4. Generate and save 6 charts
 
-> ⏱️ The Excel download may take 30–60 seconds depending on your internet speed.
+>  The Excel download may take 30–60 seconds depending on your internet speed.
 
 ---
 
@@ -229,7 +229,7 @@ GOV.UK Excel file
 
 ## Important Security Note
 
-> 🔐 **The original notebook contains a hardcoded database password.** Before pushing to GitHub, make sure you:
+>  **The original notebook contains a hardcoded database password.** Before pushing to GitHub, make sure you:
 >
 > 1. Move the `DB_URL` into a `.env` file (see [Setup Instructions](#setup-instructions))
 > 2. Confirm `.env` appears in `.gitignore` (it does by default in this repo)
